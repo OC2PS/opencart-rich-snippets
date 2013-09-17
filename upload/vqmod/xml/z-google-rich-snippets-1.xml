@@ -1,0 +1,41 @@
+<modification>
+	<id><![CDATA[@tik Google Rich Snippets p1]]></id>
+	<version><![CDATA[1.4]]></version>
+	<vqmver><![CDATA[2.4.1]]></vqmver>
+	<author><![CDATA[OC2PS]]></author>
+	<file name="catalog/model/catalog/product.php">
+		<operation info="Skip rounding-off average rating">
+			<search position="replace" error="skip"><![CDATA[round]]></search>
+			<add><![CDATA[]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/product.php">
+		<operation info="Grab number of reviews">
+			<search position="after" error="skip"><![CDATA[(int)$product_info['reviews']);]]></search>
+			<add><![CDATA[$this->data['reviewnos'] = $product_info['reviews'];
+			$this->data['stockqty'] = $product_info['quantity'];]]></add>
+		</operation>
+		<operation info="Grab number of reviews">
+			<search position="after" error="skip"><![CDATA[(int)$result['reviews']),]]></search>
+			<add><![CDATA['stockqty'    => $result['quantity'],
+			'reviewnos'    => $result['reviews'],]]></add>
+		</operation>
+		<operation info="disable rounding off of rating and grab currency code">
+			<search position="replace" error="skip"><![CDATA[$this->data['rating'] = (int)$product_info['rating'];]]></search>
+			<add><![CDATA[$this->data['rating'] = $product_info['rating'];
+$this->data['currencycode'] = $this->currency->getCode();]]></add>
+		</operation>
+		<operation info="disable rounding off of rating">
+			<search position="replace" error="skip"><![CDATA[$rating = (int)$result['rating'];]]></search>
+			<add><![CDATA[$rating = $result['rating'];]]></add>
+		</operation>
+		<operation info="Grab currency code">
+			<search position="before" error="skip"><![CDATA[$this->data['products'][] = array(]]></search>
+			<add><![CDATA[$currencycode = $this->currency;]]></add>
+		</operation>
+		<operation info="Grab currency code">
+			<search position="before" error="skip"><![CDATA['rating'     => $rating,]]></search>
+			<add><![CDATA['currencycode'    => $currencycode,]]></add>
+		</operation>
+	</file>
+</modification>
