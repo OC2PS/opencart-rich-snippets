@@ -1,13 +1,13 @@
 <modification>
 	<id><![CDATA[OC2PS Credit]]></id>
-	<version><![CDATA[1.2]]></version>
+	<version><![CDATA[1.3]]></version>
 	<vqmver><![CDATA[2.4.1]]></vqmver>
 	<author><![CDATA[OC2PS]]></author>
 	<file name="catalog/language/*/common/footer.php">
 		<operation>
-			<search position="replace" error="log"><![CDATA[$_['text_powered']]]></search>
-			<add><![CDATA[$_['text_powered']      = '<b>&copy; %s %s</b><br />Proudly powered by <a href="http://www.opencart.com/">OpenCart</a> and <a href="http://www.csillamvilag.com/">CsillámVilág</a>';
-$_['text_powered_old']]]></add>
+			<search position="replace" error="skip"><![CDATA[$_['text_powered']]]></search>
+			<add><![CDATA[$_['text_powered']      = 'Powered By <a href="http://www.opencart.com">OpenCart</a> and <a href="http://www.csillamvilag.com">CsillámVilág</a><br /> %s &copy; %s';
+			// ]]></add>
 		</operation>
 	</file>
 </modification>

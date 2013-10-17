@@ -1,6 +1,6 @@
 <modification>
 	<id><![CDATA[@tik Google Rich Snippets p2]]></id>
-	<version><![CDATA[1.9.7]]></version>
+	<version><![CDATA[1.9.8]]></version>
 	<vqmver><![CDATA[2.4.1]]></vqmver>
 	<author><![CDATA[OC2PS]]></author>
 	<file name="catalog/view/theme/*/template/product/product.tpl">
@@ -29,7 +29,7 @@
 			<add><![CDATA[<span itemprop="price"><?php echo $special; ?></span>]]></add>
 		</operation>
 		<operation info="Close price div">
-			<search position="before" offset="2" index="1" error="skip"><![CDATA[<?php if ($options) { ?>]]></search>
+			<search position="before" offset="2" index="1" error="skip"><![CDATA[<?php if ($profiles): ?>]]></search>
 			<add><![CDATA[</div>]]></add>
 		</operation>
 		<operation info="Markup rating">
