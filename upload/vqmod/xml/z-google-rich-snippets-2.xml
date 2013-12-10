@@ -1,6 +1,6 @@
 <modification>
 	<id><![CDATA[@tik Google Rich Snippets p2]]></id>
-	<version><![CDATA[1.9.8]]></version>
+	<version><![CDATA[1.9.9]]></version>
 	<vqmver><![CDATA[2.4.1]]></vqmver>
 	<author><![CDATA[OC2PS]]></author>
 	<file name="catalog/view/theme/*/template/product/product.tpl">
@@ -52,6 +52,10 @@
 			<search position="replace" error="skip"><![CDATA[<?php echo $content_bottom; ?>]]></search>
 			<add><![CDATA[</div><?php echo $content_bottom; ?>]]></add>
 		</operation>
+		<operation info="Related products star rating fix">
+			<search position="replace" error="skip"><![CDATA[<img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png"]]></search>
+			<add><![CDATA[<img src="catalog/view/theme/default/image/stars-<?php echo round($product['rating']); ?>.png"]]></add>
+		</operation>
 	</file>
 	<file name="catalog/view/theme/*/template/product/review.tpl">
 		<operation info="Begin review schema">
@@ -79,7 +83,7 @@
 			<add><![CDATA[<span itemprop="description"><?php echo $review['text']; ?></span>]]></add>
 		</operation>
 	</file>	
-	<file path="catalog/view/theme/*/template/product/" name="category.tpl,manufacturer_info.tpl">
+	<file path="catalog/view/theme/*/template/product/" name="category.tpl,manufacturer_info.tpl,search.tpl">
 		<operation info="Fix rating stars">
 			<search position="replace" error="skip"><![CDATA[stars-<?php echo $product['rating']; ?>.png"]]></search>
 			<add><![CDATA[stars-<?php echo round($product['rating']); ?>.png" title="<?php echo round($product['rating'],1); ?> (<?php echo $product['reviews']; ?>)" ]]></add>
