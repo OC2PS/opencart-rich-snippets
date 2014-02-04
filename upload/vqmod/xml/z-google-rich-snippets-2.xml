@@ -1,97 +1,97 @@
 <modification>
 	<id><![CDATA[@tik Google Rich Snippets p2]]></id>
-	<version><![CDATA[1.9.9]]></version>
+	<version><![CDATA[2.0]]></version>
 	<vqmver><![CDATA[2.4.1]]></vqmver>
 	<author><![CDATA[OC2PS]]></author>
 	<file name="catalog/view/theme/*/template/product/product.tpl">
 		<operation info="Begin schema">
-			<search position="replace" error="skip"><![CDATA[<?php echo $content_top; ?>]]></search>
+			<search position="replace" error="log"><![CDATA[<?php echo $content_top; ?>]]></search>
 			<add><![CDATA[<div itemscope itemtype="http://schema.org/Product"><?php echo $content_top; ?>]]></add>
 		</operation>
 		<operation info="Markup product name">
-			<search position="replace" error="skip"><![CDATA[<h1><?php echo $heading_title; ?></h1>]]></search>
+			<search position="replace" error="log"><![CDATA[<h1><?php echo $heading_title; ?></h1>]]></search>
 			<add><![CDATA[<h1><span itemprop="name"><?php echo $heading_title; ?></span></h1>]]></add>
 		</operation>
 		<operation info="Markup product image(s)">
-			<search position="replace" index="1" error="skip"><![CDATA[src="<?php echo $thumb; ?>" ]]></search>
+			<search position="replace" index="1" error="log"><![CDATA[src="<?php echo $thumb; ?>" ]]></search>
 			<add><![CDATA[src="<?php echo $thumb; ?>" itemprop="image" ]]></add>
 		</operation>
 		<operation info="Markup currency and add stock status as In stock.">
-			<search position="replace" index="1" error="skip"><![CDATA[<div class="price"><?php echo $text_price; ?>]]></search>
+			<search position="replace" index="1" error="log"><![CDATA[<div class="price"><?php echo $text_price; ?>]]></search>
 			<add><![CDATA[<div class="price"><div itemprop="offers" itemscope itemtype="http://schema.org/Offer"><?php echo $text_price; ?><meta itemprop="priceCurrency" content="<?php echo $currencycode; ?>" /><link itemprop="availability" href="http://schema.org/<?php if ($stockqty>0) {echo "InStock"; } ?>" />]]></add>
 		</operation>
 		<operation info="Markup price">
-			<search position="replace" index="1" error="skip"><![CDATA[<?php echo $price; ?>]]></search>
+			<search position="replace" index="1" error="log"><![CDATA[<?php echo $price; ?>]]></search>
 			<add><![CDATA[<span itemprop="price"><?php echo $price; ?></span>]]></add>
 		</operation>
 		<operation info="Markup price">
-			<search position="replace" index="1" error="skip"><![CDATA[<?php echo $special; ?>]]></search>
+			<search position="replace" index="1" error="log"><![CDATA[<?php echo $special; ?>]]></search>
 			<add><![CDATA[<span itemprop="price"><?php echo $special; ?></span>]]></add>
 		</operation>
 		<operation info="Close price div">
-			<search position="before" offset="2" index="1" error="skip"><![CDATA[<?php if ($profiles): ?>]]></search>
+			<search position="before" offset="2" index="1" error="log"><![CDATA[<?php if ($profiles): ?>]]></search>
 			<add><![CDATA[</div>]]></add>
 		</operation>
 		<operation info="Markup rating">
-			<search position="replace" error="skip"><![CDATA[<div><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />]]></search>
+			<search position="replace" error="log"><![CDATA[<div><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />]]></search>
 			<add><![CDATA[<div><div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"><img src="catalog/view/theme/default/image/stars-<?php echo round($rating); ?>.png" alt="<?php echo round($rating,1); ?>" title="<?php echo round($rating,1).'* ('.$reviews.') '; ?>" /> (<span itemprop="ratingValue"><?php echo round($rating,1); ?></span>/5)]]></add>
 		</operation>
 		<operation info="Markup review count">
-			<search position="replace" index="1" error="skip"><![CDATA[<?php echo $reviews; ?>]]></search>
+			<search position="replace" index="1" error="log"><![CDATA[<?php echo $reviews; ?>]]></search>
 			<add><![CDATA[<span itemprop="reviewCount"><?php echo $reviews; ?></span>]]></add>
 		</operation>
 		<operation info="Close rating div">
-			<search position="replace" error="skip"><![CDATA[<?php echo $text_write; ?></a></div>]]></search>
+			<search position="replace" error="log"><![CDATA[<?php echo $text_write; ?></a></div>]]></search>
 			<add><![CDATA[<?php echo $text_write; ?></a></div></div>]]></add>
 		</operation>
 		<operation info="Markup description">
-			<search position="replace" error="skip"><![CDATA[<?php echo $description; ?>]]></search>
+			<search position="replace" error="log"><![CDATA[<?php echo $description; ?>]]></search>
 			<add><![CDATA[<span itemprop="description"><?php echo $description; ?></span>]]></add>
 		</operation>
 		<operation info="Close main div">
-			<search position="replace" error="skip"><![CDATA[<?php echo $content_bottom; ?>]]></search>
+			<search position="replace" error="log"><![CDATA[<?php echo $content_bottom; ?>]]></search>
 			<add><![CDATA[</div><?php echo $content_bottom; ?>]]></add>
 		</operation>
 		<operation info="Related products star rating fix">
-			<search position="replace" error="skip"><![CDATA[<img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png"]]></search>
-			<add><![CDATA[<img src="catalog/view/theme/default/image/stars-<?php echo round($product['rating']); ?>.png"]]></add>
+			<search position="replace" error="log"><![CDATA[<img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png" alt="<?php echo $product['reviews']; ?>" />]]></search>
+			<add><![CDATA[<img src="catalog/view/theme/default/image/stars-<?php echo round($product['rating']); ?>.png" title="<?php echo round($product['rating']); ?>/5" alt="<?php echo round($product['reviews']); ?>" />]]></add>
 		</operation>
 	</file>
 	<file name="catalog/view/theme/*/template/product/review.tpl">
 		<operation info="Begin review schema">
-			<search position="after" error="skip"><![CDATA[<?php if ($reviews) { ?>]]></search>
+			<search position="after" error="log"><![CDATA[<?php if ($reviews) { ?>]]></search>
 			<add><![CDATA[<div itemprop="review" itemscope itemtype="http://schema.org/Review">]]></add>
 		</operation>
 		<operation info="Close main div">
-			<search position="before" error="skip"><![CDATA[<?php } else { ?>]]></search>
+			<search position="before" error="log"><![CDATA[<?php } else { ?>]]></search>
 			<add><![CDATA[</div>]]></add>
 		</operation>
 		<operation info="Markup author">
-			<search position="replace" error="skip"><![CDATA[<?php echo $review['author']; ?>]]></search>
+			<search position="replace" error="log"><![CDATA[<?php echo $review['author']; ?>]]></search>
 			<add><![CDATA[<span itemprop="author"><?php echo $review['author']; ?></span>]]></add>
 		</operation>
 		<operation info="Markup date">
-			<search position="replace" error="skip"><![CDATA[<?php echo $review['date_added']; ?>]]></search>
+			<search position="replace" error="log"><![CDATA[<?php echo $review['date_added']; ?>]]></search>
 			<add><![CDATA[<meta itemprop="datePublished" content="<?php echo $review['date_added']; ?>"><?php echo $review['date_added']; ?>]]></add>
 		</operation>
 		<operation info="Markup rating">
-			<search position="replace" error="skip"><![CDATA[<img src="catalog/view/theme/default/image/stars-<?php echo $review['rating'] . '.png'; ?>" alt="<?php echo $review['reviews']; ?>" />]]></search>
+			<search position="replace" error="log"><![CDATA[<img src="catalog/view/theme/default/image/stars-<?php echo $review['rating'] . '.png'; ?>" alt="<?php echo $review['reviews']; ?>" />]]></search>
 			<add><![CDATA[<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating"><img src="catalog/view/theme/default/image/stars-<?php echo $review['rating'] . '.png'; ?>" alt="<?php echo $review['rating']; ?>" title="<?php echo $review['rating']; ?> "/><meta itemprop="worstRating" content = "1"> ( <span itemprop="ratingValue"><?php echo $review['rating']; ?></span> / <span itemprop="bestRating">5</span> )</div>]]></add>
 		</operation>
 		<operation info="Markup review">
-			<search position="replace" error="skip"><![CDATA[<?php echo $review['text']; ?>]]></search>
+			<search position="replace" error="log"><![CDATA[<?php echo $review['text']; ?>]]></search>
 			<add><![CDATA[<span itemprop="description"><?php echo $review['text']; ?></span>]]></add>
 		</operation>
 	</file>	
 	<file path="catalog/view/theme/*/template/product/" name="category.tpl,manufacturer_info.tpl,search.tpl">
 		<operation info="Fix rating stars">
-			<search position="replace" error="skip"><![CDATA[stars-<?php echo $product['rating']; ?>.png"]]></search>
+			<search position="replace" error="log"><![CDATA[stars-<?php echo $product['rating']; ?>.png"]]></search>
 			<add><![CDATA[stars-<?php echo round($product['rating']); ?>.png" title="<?php echo round($product['rating'],1); ?> (<?php echo $product['reviews']; ?>)" ]]></add>
 		</operation>
 	</file>
 	<file path="catalog/view/theme/*/template/module/" name="bestseller.tpl,featured.tpl,latest.tpl,special.tpl">
 		<operation info="Fix rating stars">
-			<search position="replace" error="skip"><![CDATA[stars-<?php echo $product['rating']; ?>.png"]]></search>
+			<search position="replace" error="log"><![CDATA[stars-<?php echo $product['rating']; ?>.png"]]></search>
 			<add><![CDATA[stars-<?php echo round($product['rating']); ?>.png" title="<?php echo round($product['rating'],1); ?> (<?php echo $product['reviews']; ?>)" ]]></add>
 		</operation>
 	</file>
